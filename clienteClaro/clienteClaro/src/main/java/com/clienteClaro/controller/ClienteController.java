@@ -1,5 +1,12 @@
 package com.clienteClaro.controller;
 
+import com.clienteClaro.dto.ClienteDTO;
+import com.clienteClaro.service.ClienteService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
 @RestController
 @RequestMapping("/clientes")
 @RequiredArgsConstructor
@@ -8,23 +15,12 @@ public class ClienteController {
     private final ClienteService service;
 
     @PostMapping
-    public Cliente criar(@RequestBody Cliente cliente){
-        return service.criar(cliente);
+    public ClienteDTO criar(@RequestBody ClienteDTO dto){
+        return service.criar(dto);
     }
 
     @GetMapping
-    public List<Cliente> listar(){
+    public List<ClienteDTO> listar(){
         return service.listar();
-    }
-
-    @PutMapping("/{id}")
-    public Cliente atualizar(@PathVariable Long id,
-                             @RequestBody Cliente cliente){
-        return service.atualizar(id, cliente);
-    }
-
-    @DeleteMapping("/{id}")
-    public void deletar(@PathVariable Long id){
-        service.deletar(id);
     }
 }
